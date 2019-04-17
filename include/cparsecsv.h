@@ -12,6 +12,14 @@
 #include <stdio.h>  // FILE
 #include <stdlib.h> // size_t
 
+/// The buffer for lines in a CSV. Redefine for very long lines.
+/// TODO Do this on the fly
+#define CSV_LINE_BUFFER 1024
+
+/// The buffer for items per line in a CSV. Buffer will expand to
+/// accomodate additional items. Redefine to optimize.
+#define CSV_ENTRY_BUFFER 16
+
 /// ===========================================================================
 /// Structure definitions
 /// ===========================================================================
@@ -45,11 +53,6 @@ struct MappedCSVEntry_s
 };
 
 typedef struct MappedCSVEntry_s* MappedCSVEntry;
-
-struct CSVReader
-{
-	FILE* file;
-}
 
 /// ===========================================================================
 /// Function declarations
@@ -121,7 +124,22 @@ char* MappedCSVEntry_get(const MappedCSVEntry entry, const char* column);
 char* MappedCSVEntry_getIndex(const MappedCSVEntry entry, const size_t index);
 
 /**
- * 
-CSVReader CSVReader_create(FILE* in);
+ * Reads in the next line from the given file. If EOF, returns NULL.
+ *
+ * @param in File to read. File must not be NULL, and must have read permissions.
+ * @return CSVEntry with relevant data, or NULL if EOF.
+ */
+CSVEntry CSV_readLine(FILE* in);
+
+/**
+ * Reads in the next line from the given file. If EOF, returns NULL.
+ * Creates a MappedCSVEntry with the data mapped to the given CSVHeader.
+ *
+ * @param header CSVHeader to map to.
+ * @param in File to read from. Must not be NULL, and must have read permissions.
+ * @return Returns a MappedCSVEntry, or NULL if EOF.
+ */
+MappedCSVEntry CSV_readMappedLine(CSVHeader header, FILE* in);
+
 
 #endif
