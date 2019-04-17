@@ -8,6 +8,7 @@
 #ifndef CPARSECSV_H
 #define CPARSECSV_H
 
+#include "arraylist.h"
 #include <stdlib.h> // size_t
 
 /// ===========================================================================

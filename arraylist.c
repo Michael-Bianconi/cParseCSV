@@ -99,9 +99,7 @@ ArrayList ArrayList_copy(ArrayList list)
 
 
 ArrayList ArrayList_create(size_t size)
-{
-	
-
+{	
 	// Size cannot be 0
 	if (size == 0)
 	{
@@ -135,7 +133,6 @@ unsigned short ArrayList_equals(ArrayList a, ArrayList b)
 	// lists must be same size
 	if (a->size != b->size)
 	{
-		("lists not equal\n");
 		return 0;
 	}
 

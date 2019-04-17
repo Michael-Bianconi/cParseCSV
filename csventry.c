@@ -6,7 +6,9 @@
  */
 
 #include "cparsecsv.h"
+#include "arraylist.h"
 #include <stdlib.h> // size_t, malloc(), free()
+#include <string.h> // strcmp()
 
 CSVEntry CSVEntry_create(const size_t buffer)
 {
@@ -23,15 +25,16 @@ void CSVEntry_free(CSVEntry entry)
 
 char* CSVEntry_get(const CSVEntry entry, const size_t index)
 {
-	if (ArrayList_size(entry->data) >= index) return NULL;
+	if (entry->data->size >= index) return NULL;
 	else return ArrayList_get(entry->data, index);
 }
 
 MappedCSVEntry MappedCSVEntry_create(const CSVHeader header)
 {
-	size_t buffer = ArrayList_size(header->data);
+	size_t buffer = header->data->size;
 	MappedCSVEntry entry = malloc(sizeof(struct MappedCSVEntry_s));
 	CSVEntry data = CSVEntry_create(buffer);
+	entry->data = data;
 	return entry;
 }
 
@@ -43,7 +46,7 @@ void MappedCSVEntry_free(MappedCSVEntry entry)
 
 char* MappedCSVEntry_get(const MappedCSVEntry entry, const char* column)
 {
-	for (size_t i = 0; i < ArrayList_size(entry->header->size); i++)
+	for (size_t i = 0; i < entry->header->data->size; i++)
 	{
 		if (strcmp(ArrayList_get(entry->header->data, i), column) == 0)
 		{
