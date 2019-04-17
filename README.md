@@ -51,3 +51,7 @@ header column name, using MappedCSVEntry_get(entry, column).
     CSVEntry_free(line1);
     MappedCSVEntry_free(line2);
     fclose(csv);
+    
+## Issues
+
+    Calling CSV_readLine() or CSV_readMappedLine() without freeing the result will cause a memory leak.
