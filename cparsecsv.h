@@ -8,6 +8,8 @@
 #ifndef CPARSECSV_H
 #define CPARSECSV_H
 
+#include <stdlib.h> // size_t
+
 /// ===========================================================================
 /// Structure definitions
 /// ===========================================================================
@@ -19,13 +21,13 @@
  * CSVHeaders are the same as CSVEntries, just renamed for clarity.
  * Any function used for CSVEntries should also be used for CSVHeaders.
  */
-struct CSVEntry
+struct CSVEntry_s
 {
 	ArrayList data;
 };
 
-typedef struct CSVEntry* CSVEntry;
-typedef struct CSVEntry* CSVHeader; // typedef'd for clarity
+typedef struct CSVEntry_s* CSVEntry;
+typedef struct CSVEntry_s* CSVHeader; // typedef'd for clarity
 
 /**
  * Holds both data and a CSVHeader. The CSVHeader <i>must</i>
@@ -34,13 +36,13 @@ typedef struct CSVEntry* CSVHeader; // typedef'd for clarity
  * MappedCSVEntries allow devs to access a specific column
  * via a phrase, rather than an index.
  */
-struct MappedCSVEntry
+struct MappedCSVEntry_s
 {
 	CSVHeader header;
 	CSVEntry  data;
 };
 
-typedef struct MappedCSVEntry* MappedCSVEntry;
+typedef struct MappedCSVEntry_s* MappedCSVEntry;
 
 /// ===========================================================================
 /// Function declarations
