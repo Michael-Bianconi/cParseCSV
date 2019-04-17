@@ -9,6 +9,7 @@
 #define CPARSECSV_H
 
 #include "arraylist.h"
+#include <stdio.h>  // FILE
 #include <stdlib.h> // size_t
 
 /// ===========================================================================
@@ -44,6 +45,11 @@ struct MappedCSVEntry_s
 };
 
 typedef struct MappedCSVEntry_s* MappedCSVEntry;
+
+struct CSVReader
+{
+	FILE* file;
+}
 
 /// ===========================================================================
 /// Function declarations
@@ -113,5 +119,9 @@ char* MappedCSVEntry_get(const MappedCSVEntry entry, const char* column);
  * @return Returns the data, or null if not found.
  */
 char* MappedCSVEntry_getIndex(const MappedCSVEntry entry, const size_t index);
+
+/**
+ * 
+CSVReader CSVReader_create(FILE* in);
 
 #endif
