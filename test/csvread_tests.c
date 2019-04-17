@@ -47,9 +47,6 @@ static void _TEST_CSV_READMAPPEDLINE()
 	assert(line2);
 	assert(!null);
 
-    ArrayList_print(line2->data->data);
-
-
 	CSVEntry_free(header);
 	MappedCSVEntry_free(line1);
 	MappedCSVEntry_free(line2);
@@ -65,6 +62,4 @@ int main(int argc, char** argv)
 
 	_TEST_CSV_READLINE();
 	_TEST_CSV_READMAPPEDLINE();
-	test();
-
 }
