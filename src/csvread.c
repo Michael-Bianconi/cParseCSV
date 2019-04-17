@@ -29,9 +29,6 @@ CSVEntry CSV_readLine(FILE* in)
 		// Item found, populate entry
 		if (c == ',' || c == '\0' || c == '\n')
 		{
-			// Don't populate if it's the last comma on the line
-			if (end == len-1) break;
-
 			size_t itemLen = end - start;
 			char item[itemLen+1];
 			snprintf(item, itemLen+1, "%s", lineBuffer+start);
@@ -53,7 +50,7 @@ MappedCSVEntry CSV_readMappedLine(CSVHeader header, FILE* in)
 	// Build CSVEntry
 	size_t start = 0;
 	size_t end = 0;
-	size_t len = strlen(lineBuffer);
+	size_t len = strlen(lineBuffer)+1;
 	MappedCSVEntry entry = MappedCSVEntry_create(header);
 
 	while (end < len) {
@@ -64,8 +61,6 @@ MappedCSVEntry CSV_readMappedLine(CSVHeader header, FILE* in)
 		if (c == ',' || c == '\0' || c == '\n')
 		{
 			// Don't populate if it's the last comma on the line
-			if (end == len-1) break;
-
 			size_t itemLen = end - start;
 			char item[itemLen+1];
 			snprintf(item, itemLen+1, "%s", lineBuffer+start);
