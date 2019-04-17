@@ -16,7 +16,7 @@ header column name, using MappedCSVEntry_get(entry, column).
 
 ## Build
 
-1. Place cparsecsv.h into the include directory.
+1. Place cparsecsv.h and arraylist.h into the include directory.
 2. Place arraylist.c, csventry.c, and csvread.c into the source directory.
 
 ## Usage
