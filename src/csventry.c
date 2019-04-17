@@ -13,7 +13,7 @@
 CSVEntry CSVEntry_create(const size_t buffer)
 {
 	CSVEntry entry = malloc(sizeof(struct CSVEntry_s));
-	entry->data = ArrayList_create(buffer);
+	entry->data = ArrayList_create(buffer > 0 ? buffer : 1);
 	return entry;
 }
 
@@ -25,7 +25,7 @@ void CSVEntry_free(CSVEntry entry)
 
 char* CSVEntry_get(const CSVEntry entry, const size_t index)
 {
-	if (entry->data->size >= index) return NULL;
+	if (entry->data->size <= index) return NULL;
 	else return ArrayList_get(entry->data, index);
 }
 
@@ -33,8 +33,8 @@ MappedCSVEntry MappedCSVEntry_create(const CSVHeader header)
 {
 	size_t buffer = header->data->size;
 	MappedCSVEntry entry = malloc(sizeof(struct MappedCSVEntry_s));
-	CSVEntry data = CSVEntry_create(buffer);
-	entry->data = data;
+	entry->header = header;
+	entry->data = CSVEntry_create(buffer);
 	return entry;
 }
 
